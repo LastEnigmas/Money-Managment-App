@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Aria Bank</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="address">Address</string>
+    <string name="name">Name</string>
+    <string name="have_an_account_login">Have an account? Login</string>
+    <string name="developed_by_aria_taghizadeh">Developed By Aria Taghizadeh</string>
+    <string name="warning_something_is_wrong">Warning! Something is wrong!</string>
+    <string name="enter_warning">Please fill all the blanks</string>
+    <string name="exist_user">There is an existing user with the same email.</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account_register_from_here">Don\'t have an account? Register from here</string>
+    <string name="plz_entr_email">Please enter your email.</string>
+    <string name="user_no_good">The user doesn\'t exist!</string>
+    <string name="wrong_user">Your email/password is wrong</string>
+    <string name="stats">Stats</string>
+    <string name="transaction">Transaction</string>
+    <string name="home">Home</string>
+    <string name="loan">Loan</string>
+    <string name="investment">Investment</string>
+    <string name="shopping">Shopping</string>
+    <string name="send_receive">Send/Receive</string>
+</resources>

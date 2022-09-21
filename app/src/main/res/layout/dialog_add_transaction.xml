@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:id="@+id/shoppingrellayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/shoppingimg"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/ic_shop"
+                android:layout_marginStart="10dp"/>
+
+            <TextView
+                android:id="@+id/txtShopping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/shopping"
+                android:layout_toEndOf="@+id/shoppingimg"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/investmentrellayout"
+                android:layout_below="@+id/shoppingrellayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:layout_centerHorizontal="true">
+                <ImageView
+                    android:id="@+id/investmentimg"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:src="@drawable/ic_investment"
+                    android:layout_marginStart="10dp"/>
+
+                <TextView
+                    android:id="@+id/txtinvest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/investment"
+                    android:layout_toEndOf="@+id/investmentimg"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/loanrellayout"
+                android:layout_width="match_parent"
+                android:layout_marginTop="17dp"
+                android:layout_below="@+id/investmentrellayout"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/loanimg"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:src="@drawable/ic_loan"
+                    android:layout_marginStart="10dp"/>
+
+                <TextView
+                    android:id="@+id/txtloan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/loan"
+                    android:layout_toEndOf="@+id/loanimg"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/senlayout"
+                android:layout_width="match_parent"
+                android:layout_marginTop="17dp"
+                android:layout_below="@+id/loanrellayout"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/sendimg"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:src="@drawable/ic_transaction"
+                    android:layout_marginStart="10dp"/>
+
+                <TextView
+                    android:id="@+id/txtsend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/sendimg"
+                    android:text="@string/send_receive"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">بانک آریا</string>
+    <string name="email">ایمیل</string>
+    <string name="password">رمز</string>
+    <string name="register">ثبت نام</string>
+    <string name="address">ادرس</string>
+    <string name="name">نام</string>
+    <string name="have_an_account_login">قبلا ثبت نام کرده اید؟ ورود</string>
+    <string name="developed_by_aria_taghizadeh">ساخته شده توسط اریا تقی زاده</string>
+    <string name="warning_something_is_wrong">اخطار ! شکلی پیش امد !</string>
+</resources>
