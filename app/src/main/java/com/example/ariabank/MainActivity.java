@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         Users user= utils.isUserLoggedIn();
         if(user!=null){
             getAccountAmount=new getAccountAmount();
-            getAccountAmount.execute(user.getId());
+            getAccountAmount.execute(user);
 
         }
     }
@@ -293,7 +293,10 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.menu_item_investment:
 
-                        //TODO: complete
+                        Intent intent=new Intent(MainActivity.this,InvestmentActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
                         break;
 
                     case R.id.menu_item_loan:
@@ -465,14 +468,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class getAccountAmount extends AsyncTask<Integer,Void,Double>{
+    private class getAccountAmount extends AsyncTask<Users,Void,Double>{
 
 
         @Override
-        protected Double doInBackground(Integer... integers) {
+        protected Double doInBackground(Users... users) {
                AppDataBase db=AppDataBase.getInstance(MainActivity.this);
-            List<Users> lst= db.usersdao().getUserAmount(integers[0]);
+            List<Users> lst= db.usersdao().getSpecificUser(users[0].getEmail());
             if(lst.size()>0){
+                Log.d(TAG, "doInBackground: "+lst.get(0).getRemained_amount());
                 return lst.get(0).getRemained_amount();
             }else {
                 return null;

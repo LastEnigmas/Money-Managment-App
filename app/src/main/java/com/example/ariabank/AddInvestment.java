@@ -26,6 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class AddInvestment extends AppCompatActivity {
@@ -126,7 +127,7 @@ public class AddInvestment extends AppCompatActivity {
 
             this.date=edttxtInitDate.getText().toString();
             this.name=edttxtname.getText().toString();
-            this.amount=Double.valueOf(edttxtInitDate.getText().toString());
+            this.amount=Double.valueOf(edttxtInitAmount.getText().toString());
         }
 
         @Override
@@ -178,7 +179,7 @@ public class AddInvestment extends AppCompatActivity {
             this.amount=Double.valueOf(edttxtInitAmount.getText().toString());
             this.monthlyROI=Double.valueOf(edttxtROI.getText().toString());
             this.name=edttxtname.getText().toString();
-            this.initDate=edttxtInitAmount.getText().toString();
+            this.initDate=edttxtInitDate.getText().toString();
             this.FinishDate=edttxtFinishDate.getText().toString();
             Users user= utils.isUserLoggedIn();
             if(null!=user){
@@ -196,7 +197,8 @@ public class AddInvestment extends AppCompatActivity {
                 InvestmentTable invest1=new InvestmentTable(amount,monthlyROI,name,initDate,FinishDate,user_id,integers[0]);
                 db.investmentdao().InsertInvestment(invest1);
 
-                Double remainder=db.usersdao().getUserRemainder(utils.isUserLoggedIn().getId());
+                List<Users> user=db.usersdao().getSpecificUser(utils.isUserLoggedIn().getEmail());
+                Double remainder=user.get(0).getRemained_amount();
 
                 db.usersdao().UpdateAmount(remainder-amount,user_id);
 

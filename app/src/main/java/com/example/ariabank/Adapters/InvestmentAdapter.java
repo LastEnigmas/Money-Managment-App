@@ -1,5 +1,6 @@
 package com.example.ariabank.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,11 @@ import java.util.Calendar;
 public class InvestmentAdapter extends RecyclerView.Adapter<InvestmentAdapter.ViewHolder> {
     private ArrayList<InvestmentTable> investments=new ArrayList<>();
 
-    public InvestmentAdapter() {
+    private int number=-1;
+    private Context context;
+
+    public InvestmentAdapter(Context context) {
+        this.context = context;
     }
 
     @NonNull
@@ -35,9 +40,17 @@ public class InvestmentAdapter extends RecyclerView.Adapter<InvestmentAdapter.Vi
         holder.name.setText(investments.get(position).getName());
         holder.initDate.setText(investments.get(position).getInit_date());
         holder.finishDate.setText(investments.get(position).getFinish_date());
-        holder.amount.setText(String.valueOf(investments.get(position).getAmount()));
-        holder.roi.setText(String.valueOf(investments.get(position).getMonthly_roi()));
-        holder.profit.setText(String.valueOf(getTotalProfit(investments.get(position))));
+        holder.amount.setText(String.valueOf(investments.get(position).getAmount())+"$");
+        holder.roi.setText(String.valueOf(investments.get(position).getMonthly_roi())+"%");
+        holder.profit.setText(String.valueOf(getTotalProfit(investments.get(position)))+"$");
+        if (number== -1){
+            holder.parent.setCardBackgroundColor(context.getResources().getColor(R.color.light_blue));
+            number=1;
+        }else {
+            holder.parent.setCardBackgroundColor(context.getResources().getColor(R.color.light_green));
+            number=-1;
+
+        }
 
     }
 

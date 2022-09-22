@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -28,6 +29,8 @@ public interface usersDAO {
 
     @Query("UPDATE users SET remained_amount=:amount WHERE id=:id")
     void UpdateAmount(Double amount,int id);
+
+
 
 
 
