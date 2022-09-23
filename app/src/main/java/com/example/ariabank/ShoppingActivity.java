@@ -30,6 +30,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class ShoppingActivity extends AppCompatActivity implements ItemsAdapter.GetItem {
+    private static final String TAG = "ShoppingActivity";
     private Button btnPickDate,btnPickItem,btnAdd;
     private EditText edttxtDate,edttxtDesc,edttxtItemPrice,edttxtStore;
     private TextView txtWarning,txtItemName;
@@ -115,6 +116,7 @@ public class ShoppingActivity extends AppCompatActivity implements ItemsAdapter.
         private String store;
         private String description;
         private AppDataBase db;
+        private Utils util=new Utils(ShoppingActivity.this);
 
         @Override
         protected void onPreExecute() {
@@ -124,7 +126,7 @@ public class ShoppingActivity extends AppCompatActivity implements ItemsAdapter.
             loggesInUser= utils.isUserLoggedIn();
             this.date=edttxtDate.getText().toString();
             this.store=edttxtStore.getText().toString();
-            this.price=Double.valueOf(edttxtItemPrice.getText().toString());
+            this.price=-Double.parseDouble(edttxtItemPrice.getText().toString());
             this.description=edttxtDesc.getText().toString();
 
             db=AppDataBase.getInstance(ShoppingActivity.this);
@@ -139,22 +141,16 @@ public class ShoppingActivity extends AppCompatActivity implements ItemsAdapter.
 
 
 
-            Shopping_table shop1=new Shopping_table(Selecteditem.getId(),loggesInUser.getId(),transaction_id,price,date,description);
+            Shopping_table shop1=new Shopping_table(Selecteditem.getId(),loggesInUser.getId(),transaction_id,-price,date,description);
             db.shoppingDAO().insertAnewPurchase(shop1);
 
-            Double remained_amount;
-            List<Users>  lst=db.usersdao().getUserAmount(loggesInUser.getId());
-            if (lst.size()>0 && lst!=null){
-               remained_amount=lst.get(0).getRemained_amount();
-
-            }else {
-                remained_amount=0.0;
-
-            }
+            Users user= util.isUserLoggedIn();
+            List<Users> lst=db.usersdao().getSpecificUser(user.getEmail());
+            Users myUser= lst.get(0);
+            db.usersdao().UpdateWithEmail(myUser.getEmail(), myUser.getRemained_amount()+price);
 
 
 
-            db.usersdao().UpdateAmount(remained_amount-price,loggesInUser.getId());
 
             return null;
 

@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         setUpAmount();
         
         setOnClickListeners();
-        initTransactionRecView();
+         initTransactionRecView();
         initLineChart();
         initBarChart();
 
@@ -186,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpAmount() {
         Users user= utils.isUserLoggedIn();
+        Log.d(TAG, "setUpAmount: user_id: "+user.getId());
         if(user!=null){
             getAccountAmount=new getAccountAmount();
             getAccountAmount.execute(user);
@@ -469,18 +470,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class getAccountAmount extends AsyncTask<Users,Void,Double>{
-
+        private Utils util=new Utils(MainActivity.this);
 
         @Override
         protected Double doInBackground(Users... users) {
                AppDataBase db=AppDataBase.getInstance(MainActivity.this);
-            List<Users> lst= db.usersdao().getSpecificUser(users[0].getEmail());
-            if(lst.size()>0){
-                Log.d(TAG, "doInBackground: "+lst.get(0).getRemained_amount());
-                return lst.get(0).getRemained_amount();
-            }else {
-                return null;
-            }
+            Users user= util.isUserLoggedIn();
+            List<Users> lst=db.usersdao().getSpecificUser(user.getEmail());
+            Users myUser= lst.get(0);
+            return myUser.getRemained_amount();
+
+
 
 
 
@@ -493,13 +493,9 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Double aDouble) {
             super.onPostExecute(aDouble);
 
-            if(null!= aDouble){
+
                 txtAmount.setText(String.valueOf(aDouble)+"$");
-            }else {
 
-                txtAmount.setText("0.0$");
-
-            }
         }
     }
 
@@ -514,14 +510,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            for (Shopping_table s:lt){
-                Log.d(TAG, "onPostExecute: Shoppings: "+s.getDate());
-            }
-            if(lt.size()>0){
-                return new ArrayList<>(lt);
-            }else {
-                return null;
-            }
+           if(lt!=null) {
+               if (lt.size() > 0) {
+                   return new ArrayList<>(lt);
+               } else {
+                   return null;
+               }
+           }
+           return null;
 
 
 
@@ -531,95 +527,97 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(ArrayList<Shopping_table> list) {
             super.onPostExecute(list);
-            Log.d(TAG, "onPostExecute: size: "+list.size());
 
-            if(list.size()>0){
-
-                ArrayList<BarEntry> entries=new ArrayList<>();
-                for (Shopping_table s:list){
+            if (list!=null) {
 
 
-                    try {
-                        Date date= (new SimpleDateFormat("yyyy-MM-dd")).parse(s.getDate());
+                if (list.size() > 0) {
+                    Log.d(TAG, "onPostExecute: size: " + list.size());
 
-                        Calendar calendar=Calendar.getInstance();
-                        int month=calendar.get(Calendar.MONTH)+1;
-                        calendar.setTime(date);
-                        int day= calendar.get(Calendar.DAY_OF_MONTH)+1;
+                    ArrayList<BarEntry> entries = new ArrayList<>();
+                    for (Shopping_table s : list) {
 
 
-                        if(calendar.get(Calendar.MONTH)+1 ==month){
-                          boolean   doesdayexist=false;
+                        try {
+                            Date date = (new SimpleDateFormat("yyyy-MM-dd")).parse(s.getDate());
 
-                          for(BarEntry e: entries){
-                              if(e.getX()==day){
-                                  doesdayexist=true;
-                              }else {
-                                  doesdayexist=false;
-                              }
+                            Calendar calendar = Calendar.getInstance();
+                            int month = calendar.get(Calendar.MONTH) + 1;
+                            calendar.setTime(date);
+                            int day = calendar.get(Calendar.DAY_OF_MONTH) + 1;
 
 
-                          }
-                            Log.d(TAG, "onPostExecute: in For loop: "+String.valueOf(doesdayexist));
+                            if (calendar.get(Calendar.MONTH) + 1 == month) {
+                                boolean doesdayexist = false;
 
-                          if(!doesdayexist){
-                              entries.add(new BarEntry(day,(float) s.getPrice()));
-                          }else {
-                              for (BarEntry e:entries){
-                                  if (e.getX()==day){
-                                      e.setY(e.getY()+(float) s.getPrice());
-                                  }
-                              }
-                          }
+                                for (BarEntry e : entries) {
+                                    if (e.getX() == day) {
+                                        doesdayexist = true;
+                                    } else {
+                                        doesdayexist = false;
+                                    }
 
 
+                                }
+                                Log.d(TAG, "onPostExecute: in For loop: " + String.valueOf(doesdayexist));
+
+                                if (!doesdayexist) {
+                                    entries.add(new BarEntry(day, (float) s.getPrice()));
+                                } else {
+                                    for (BarEntry e : entries) {
+                                        if (e.getX() == day) {
+                                            e.setY(e.getY() + (float) s.getPrice());
+                                        }
+                                    }
+                                }
+
+
+                            }
+
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                         }
 
 
-
-
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+                    }
+                    for (Entry e : entries) {
+                        Log.d(TAG, "onPostExecute:Shopping:  x: " + e.getX() + " Y: " + e.getY());
                     }
 
 
+                    BarDataSet dataset = new BarDataSet(entries, "Shopping Chart");
+                    dataset.setValueTextSize(10f);
+
+                    dataset.setColor(Color.GREEN);
+
+                    BarData data = new BarData(dataset);
+                    data.setBarWidth(0.9f);
+
+                    barchar.getAxisRight().setEnabled(false);
+                    XAxis xAxis = barchar.getXAxis();
+
+                    xAxis.setAxisMaximum(30);
+                    xAxis.setAxisMinimum(1);
+
+
+                    xAxis.setEnabled(false);
+                    YAxis yAxis = barchar.getAxisLeft();
+                    yAxis.setAxisMaximum(150);
+                    yAxis.setAxisMinimum(10);
+                    yAxis.setDrawGridLines(false);
+
+                    barchar.setData(data);
+
+                    barchar.setDescription(null);
+
+
+                    barchar.invalidate();
+
+
+                } else {
+                    Log.d(TAG, "onPostExecute: Null");
                 }
-                for (Entry e:entries){
-                    Log.d(TAG, "onPostExecute:Shopping:  x: "+e.getX()+" Y: "+e.getY());
-                }
-
-
-                BarDataSet dataset=new BarDataSet(entries,"Shopping Chart");
-                dataset.setValueTextSize(10f);
-
-                dataset.setColor(Color.GREEN);
-
-                BarData data=new BarData(dataset);
-                data.setBarWidth(0.9f);
-
-                barchar.getAxisRight().setEnabled(false);
-                XAxis xAxis= barchar.getXAxis();
-
-                xAxis.setAxisMaximum(30);
-                xAxis.setAxisMinimum(1);
-
-
-                xAxis.setEnabled(false);
-                YAxis yAxis=barchar.getAxisLeft();
-                yAxis.setAxisMaximum(150);
-                yAxis.setAxisMinimum(10);
-                yAxis.setDrawGridLines(false);
-
-                barchar.setData(data);
-
-                barchar.setDescription(null);
-
-
-                barchar.invalidate();
-
-
-            }else {
-                Log.d(TAG, "onPostExecute: Null");
             }
 
 

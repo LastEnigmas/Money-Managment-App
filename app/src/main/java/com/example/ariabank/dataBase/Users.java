@@ -3,6 +3,7 @@ package com.example.ariabank.dataBase;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "users")
@@ -10,15 +11,30 @@ public class Users {
 
 
     @PrimaryKey(autoGenerate = true)
+    @NonNull
     private int id;
+
+    public void setId(int id) {
+
+        this.id = id;
+    }
+
     @NonNull
     private String email;
+    @NonNull
+    private String password;
+    private String first_name;
+    private String last_name;
+    private String Address;
+    private String image_url;
+    @NonNull
+    private Double remained_amount;
 
     public int getId() {
         return id;
     }
 
-    public Users(@NonNull String email, @NonNull String password, String first_name, String last_name, String address, String image_url, Double remained_amount) {
+    public Users(@NonNull String email, @NonNull String password, String first_name, String last_name, String address, String image_url, @NonNull Double remained_amount) {
         this.email = email;
         this.password = password;
         this.first_name = first_name;
@@ -28,12 +44,21 @@ public class Users {
         this.remained_amount = remained_amount;
     }
 
+    @Ignore
+    public Users(@NonNull String email, @NonNull String password, String first_name, String last_name, String address, String image_url) {
+        this.email = email;
+        this.password = password;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        Address = address;
+        this.image_url = image_url;
+        this.remained_amount = 0.0;
+    }
+
     public Users() {
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     @NonNull
     public String getEmail() {
@@ -93,13 +118,7 @@ public class Users {
         this.remained_amount = remained_amount;
     }
 
-    @NonNull
-    private String password;
-    private String first_name;
-    private String last_name;
-    private String Address;
-    private String image_url;
-    private Double remained_amount;
+
 
 
 

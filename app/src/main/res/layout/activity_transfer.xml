@@ -29,6 +29,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:hint="Amount"
+                    android:inputType="numberDecimal"
                     android:id="@+id/edttxtAmountTransfer"/>
 
 

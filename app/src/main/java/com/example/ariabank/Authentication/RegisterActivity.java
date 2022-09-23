@@ -213,8 +213,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         protected Users doInBackground(Void... voids) {
-            Users user=new Users(email,password,first_name,last_name,address,image_url,0.0);
+            Users user=new Users(email,password,first_name,last_name,address,image_url);
             appdatabase.usersdao().addUser(user);
+            appdatabase.close();
             return user;
 
 

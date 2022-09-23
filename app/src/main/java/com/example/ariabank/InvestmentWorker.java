@@ -44,7 +44,7 @@ public class InvestmentWorker extends Worker {
         db.transactiondao().insertTransaction(t1);
 
         Double current_amount=db.usersdao().getUserRemainder(user_id);
-        db.usersdao().UpdateAmount(current_amount+amount,user_id);
+        db.usersdao().UpdateAmount(current_amount-amount,user_id);
 
 
 

@@ -44,7 +44,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             holder.txtAmount.setText("+ "+amount);
             holder.txtAmount.setTextColor(Color.rgb(52,179,52));
         }else {
-            holder.txtAmount.setText("- "+amount);
+            holder.txtAmount.setText(String.valueOf(amount));
             holder.txtAmount.setTextColor(Color.RED);
 
         }

@@ -64,27 +64,6 @@ public abstract class AppDataBase extends RoomDatabase {
             itemdao.insertItem(it1);
 
 
-            Transaction trans1=new Transaction(55.0, "2022-08-10", "profit",0,"TD Bank","Monthly ROI");
-
-            transactionDAO.insertTransaction(trans1);
-
-            Transaction trans2=new Transaction(30.0, "2022-08-26", "profit",0,"Simple Invest","Monthly ROI");
-
-
-            Transaction trans3=new Transaction(110.0, "2022-07-11", "profit",0,"TD Bank","Monthly ROI");
-
-            transactionDAO.insertTransaction(trans3);
-            transactionDAO.insertTransaction(trans2);
-
-
-            Shopping_table b1=new Shopping_table(1,0,1,25.0,"2022-09-01","boughtnumber1");
-            Shopping_table b2=new Shopping_table(2,0,2,20.0,"2022-09-01","boughtnumber1");
-            Shopping_table b3=new Shopping_table(3,0,3,35.0,"2022-09-02","boughtnumber1");
-
-            shoppingDAO.insertAnewPurchase(b1);
-            shoppingDAO.insertAnewPurchase(b2);
-            shoppingDAO.insertAnewPurchase(b3);
-
 
 
 

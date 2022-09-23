@@ -15,7 +15,11 @@ public interface usersDAO {
     @Query("SELECT * FROM users WHERE email=:email")
     List<Users> getSpecificUser(String email);
 
-    @Insert(entity = Users.class,onConflict = OnConflictStrategy.IGNORE)
+
+    @Query("UPDATE users SET remained_amount=:amount WHERE email=:email")
+    Void UpdateWithEmail(String email,Double amount);
+
+    @Insert(entity = Users.class,onConflict = OnConflictStrategy.ABORT)
     void addUser(Users user);
 
     @Query("SELECT * FROM users WHERE email=:email AND password=:password")
@@ -27,7 +31,7 @@ public interface usersDAO {
     @Query("SELECT remained_amount From users WHERE id=:id")
     Double getUserRemainder(int id);
 
-    @Query("UPDATE users SET remained_amount=:amount WHERE id=:id")
+    @Query("UPDATE users SET remained_amount= :amount WHERE id= :id")
     void UpdateAmount(Double amount,int id);
 
 

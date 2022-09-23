@@ -11,7 +11,7 @@ import java.util.List;
 @Dao()
 public interface itemDAO {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE,entity = item_table.class)
+    @Insert(onConflict = OnConflictStrategy.ABORT,entity = item_table.class)
     void insertItem(item_table item);
 
     @Query("SELECT * FROM item_table")
