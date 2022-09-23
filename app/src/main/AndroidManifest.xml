@@ -16,6 +16,9 @@
         android:theme="@style/Theme.AriaBank"
         tools:targetApi="31">
         <activity
+            android:name=".TransferActivity"
+            android:exported="false" />
+        <activity
             android:name=".InvestmentActivity"
             android:exported="false" />
         <activity
