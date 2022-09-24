@@ -3,8 +3,11 @@ package com.example.ariabank;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class AddLoanActivity extends AppCompatActivity {
     private EditText edttxtName,edttxtInitAmount,edttxtROI,edttxtinitDate,edttxtFinishDate,edttxtMonthlyPayment;
@@ -31,6 +35,8 @@ public class AddLoanActivity extends AppCompatActivity {
     private Calendar initcalendar=Calendar.getInstance();
     private Calendar finishCalender=Calendar.getInstance();
     private Utils utils;
+    private AddTransaction addTransaction;
+    private AddLoan addLoan;
 
 
 
@@ -129,9 +135,26 @@ public class AddLoanActivity extends AppCompatActivity {
 
         Users user= utils.isUserLoggedIn();
         if(null!=user){
-            //TODO: ADD TRANSACTION
+            addTransaction=new AddTransaction();
+            addTransaction.execute(user.getId());
+
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(addTransaction!=null){
+            if(!addTransaction.isCancelled()){
+                addTransaction.cancel(true);
+            }
+        }
+        if(addLoan!=null){
+            if(!addLoan.isCancelled()){
+                addLoan.cancel(true);
+            }
+        }
     }
 
     private class AddTransaction extends AsyncTask<Integer,Void,Integer>{
@@ -156,11 +179,13 @@ public class AddLoanActivity extends AppCompatActivity {
             return trans_id;
         }
 
+
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             if(integer!=null){
-                //TODO:ADD LOAN
+                addLoan=new AddLoan();
+                addLoan.execute(integer);
             }
         }
     }
@@ -241,6 +266,15 @@ public class AddLoanActivity extends AppCompatActivity {
                                 .setRequiresBatteryNotLow(true)
                                 .build();
 
+                        OneTimeWorkRequest request=new OneTimeWorkRequest.Builder(LoanWorker.class)
+                                .setInputData(data)
+                                .setConstraints(constraints)
+                                .setInitialDelay(days, TimeUnit.DAYS)
+                                .addTag("loan_payment")
+                                .build();
+
+                        WorkManager.getInstance(AddLoanActivity.this).enqueue(request);
+
 
 
                     }
@@ -250,6 +284,10 @@ public class AddLoanActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+
+                Intent intent=new Intent(AddLoanActivity.this,MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
 
 
             }

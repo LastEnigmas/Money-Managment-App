@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.ariabank.AddInvestment;
+import com.example.ariabank.AddLoanActivity;
 import com.example.ariabank.R;
 import com.example.ariabank.ShoppingActivity;
 import com.example.ariabank.TransferActivity;
@@ -51,7 +52,8 @@ public class AddTransactionDialog extends DialogFragment {
         loan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Navigate the user.
+                Intent intent=new Intent(getActivity(), AddLoanActivity.class);
+                startActivity(intent);
 
             }
         });
