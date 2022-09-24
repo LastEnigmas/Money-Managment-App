@@ -13,8 +13,29 @@ public class LoanTable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    @TypeConverters(DateConverter.class)
-    private Date init_date;
+
+    private int transaction_id;
+
+    public int getTransaction_id() {
+        return transaction_id;
+    }
+
+    public void setTransaction_id(int transaction_id) {
+        this.transaction_id = transaction_id;
+    }
+
+    public LoanTable(int transaction_id, String init_date, String finish_date, double init_amount, double remained_amount, double monthly_payment, String name, int user_id) {
+        this.transaction_id = transaction_id;
+        this.init_date = init_date;
+        this.finish_date = finish_date;
+        this.init_amount = init_amount;
+        this.remained_amount = remained_amount;
+        this.monthly_payment = monthly_payment;
+        this.name = name;
+        this.user_id = user_id;
+    }
+
+    private String init_date;
 
     public int getId() {
         return id;
@@ -24,19 +45,19 @@ public class LoanTable {
         this.id = id;
     }
 
-    public Date getInit_date() {
+    public String getInit_date() {
         return init_date;
     }
 
-    public void setInit_date(Date init_date) {
+    public void setInit_date(String init_date) {
         this.init_date = init_date;
     }
 
-    public Date getFinish_date() {
+    public String getFinish_date() {
         return finish_date;
     }
 
-    public void setFinish_date(Date finish_date) {
+    public void setFinish_date(String finish_date) {
         this.finish_date = finish_date;
     }
 
@@ -80,8 +101,8 @@ public class LoanTable {
         this.user_id = user_id;
     }
 
-    @TypeConverters(DateConverter.class)
-    private Date finish_date;
+
+    private String finish_date;
     private double init_amount;
     private double remained_amount;
     private double monthly_payment;
