@@ -7,11 +7,16 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.List;
+
 @Dao
 public interface loanDAO {
 
     @Insert(entity = LoanTable.class,onConflict = OnConflictStrategy.IGNORE)
     void insertLoan(LoanTable loan);
+
+    @Query("SELECT * FROM loans_table WHERE user_id=:id")
+    List<LoanTable> getLoans(int id);
 
     @Query("SELECT remained_amount FROM loans_table WHERE  name=:name AND monthly_payment=:monthly AND user_id=:id")
     Double getLoanAmount(String name , Double monthly,int id);

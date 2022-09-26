@@ -302,7 +302,10 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.menu_item_loan:
 
-                        //TODO: complete
+                        Intent intent1=new Intent(MainActivity.this,LoanActivity.class);
+                        intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent1);
+
                         break;
 
                     case R.id.menu_item_transaction:

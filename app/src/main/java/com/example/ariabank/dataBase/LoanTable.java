@@ -15,6 +15,7 @@ public class LoanTable {
     private int id;
 
     private int transaction_id;
+    private Double monthly_roi;
 
     public int getTransaction_id() {
         return transaction_id;
@@ -24,7 +25,7 @@ public class LoanTable {
         this.transaction_id = transaction_id;
     }
 
-    public LoanTable(int transaction_id, String init_date, String finish_date, double init_amount, double remained_amount, double monthly_payment, String name, int user_id) {
+    public LoanTable(int transaction_id, String init_date, String finish_date, double init_amount, double remained_amount, double monthly_payment, String name, int user_id,Double monthly_roi) {
         this.transaction_id = transaction_id;
         this.init_date = init_date;
         this.finish_date = finish_date;
@@ -33,6 +34,15 @@ public class LoanTable {
         this.monthly_payment = monthly_payment;
         this.name = name;
         this.user_id = user_id;
+        this.monthly_roi=monthly_roi;
+    }
+
+    public Double getMonthly_roi() {
+        return monthly_roi;
+    }
+
+    public void setMonthly_roi(Double monthly_roi) {
+        this.monthly_roi = monthly_roi;
     }
 
     private String init_date;

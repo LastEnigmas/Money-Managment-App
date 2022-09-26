@@ -217,7 +217,7 @@ public class AddLoanActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(Integer... integers) {
             if(userID!=-1){
-                LoanTable loan=new LoanTable(integers[0],initDate,FinishDate,initAmount,initAmount,monthlyPayment,name,userID);
+                LoanTable loan=new LoanTable(integers[0],initDate,FinishDate,initAmount,initAmount,monthlyPayment,name,userID,monthlyROI);
                 db.loandao().insertLoan(loan);
 
                 int loan_id=db.loandao().getLoanID(initDate,FinishDate,name,initAmount);

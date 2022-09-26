@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/loanParent"
+    android:layout_margin="15dp"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+        <LinearLayout
+            android:id="@+id/nameLinLayout"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name: "/>
+            <TextView
+                android:id="@+id/loanname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Investment Name"/>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/initdatelinLayout"
+            android:layout_below="@id/nameLinLayout"
+            android:layout_marginTop="9dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Initial Date: "/>
+            <TextView
+                android:id="@+id/initdateloan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Initial Date"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ROIlinLay"
+            android:layout_below="@id/initdatelinLayout"
+            android:layout_marginTop="9dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monthly ROI: "/>
+            <TextView
+                android:id="@+id/monthlyROIloan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monthly ROI"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/monthlypaymentlinley"
+            android:layout_below="@id/ROIlinLay"
+            android:layout_marginTop="9dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monthly payment: "/>
+            <TextView
+                android:id="@+id/txtmonthlypaymentloan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monthly payment"/>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/investedamountlinlay"
+            android:layout_below="@id/monthlypaymentlinley"
+            android:layout_marginTop="9dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loan Amount: "/>
+            <TextView
+                android:id="@+id/amountLoan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loan Amount"/>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/remainedamountlinlay"
+            android:layout_below="@id/investedamountlinlay"
+            android:layout_marginTop="9dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remained Amount: "/>
+            <TextView
+                android:id="@+id/remainedAmountLoan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remained Amount"/>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/profitlinlay"
+            android:layout_below="@id/remainedamountlinlay"
+            android:layout_marginTop="9dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total expected loss: "/>
+            <TextView
+                android:id="@+id/lossAmountLoan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="loss amount"/>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/finishdatelinlay"
+            android:layout_below="@id/profitlinlay"
+            android:layout_marginTop="9dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Finish Date: "/>
+            <TextView
+                android:id="@+id/finishdateloan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="finish date"/>
+
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
