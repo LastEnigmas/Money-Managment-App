@@ -115,24 +115,32 @@ public class InvestmentActivity extends AppCompatActivity {
 
                     case R.id.menu_item_investment:
 
-                        //TODO: complete
+
+
+
                         break;
 
                     case R.id.menu_item_loan:
 
-                        //TODO: complete
+
+                        Intent intent3=new Intent(InvestmentActivity.this,LoanActivity.class);
+                        intent3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent3);
                         break;
 
                     case R.id.menu_item_transaction:
 
-                        //TODO: complete
+                       Intent intent=new Intent(InvestmentActivity.this,TransactionActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
                         break;
 
                     case R.id.menu_item_home:
 
-                        Intent intent=new Intent(InvestmentActivity.this,MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+                        Intent intent1=new Intent(InvestmentActivity.this,MainActivity.class);
+                        intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent1);
                         break;
 
 

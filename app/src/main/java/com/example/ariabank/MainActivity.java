@@ -289,7 +289,10 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.menu_item_stats:
-                        //TODO: complete
+                        Intent intent7=new Intent(MainActivity.this,StatsActivity.class);
+                        intent7.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent7);
+
                         break;
 
                     case R.id.menu_item_investment:
@@ -310,7 +313,10 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.menu_item_transaction:
 
-                        //TODO: complete
+                        Intent intent5=new Intent(MainActivity.this,TransactionActivity.class);
+                        intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent5);
+
                         break;
 
                     case R.id.menu_item_home:

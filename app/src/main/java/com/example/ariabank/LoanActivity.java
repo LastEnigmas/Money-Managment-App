@@ -77,7 +77,7 @@ public class LoanActivity extends AppCompatActivity {
     }
 
     private void initBottomNavView() {
-        bottomNavigationView.setSelectedItemId(R.id.menu_item_home);
+        bottomNavigationView.setSelectedItemId(R.id.menu_item_loan);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -101,8 +101,12 @@ public class LoanActivity extends AppCompatActivity {
 
                     case R.id.menu_item_transaction:
 
-                        //TODO: complete
+                        Intent intent4=new Intent(LoanActivity.this,TransactionActivity.class);
+                        intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent4);
+
                         break;
+
 
                     case R.id.menu_item_home:
 

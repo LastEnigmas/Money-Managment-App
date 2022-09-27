@@ -17,6 +17,23 @@ public interface TransactionDAO {
     @Query("SELECT * FROM transactions WHERE user_id=:id AND type=:type")
     List<Transaction> getprofit(int id,String type);
 
+    @Query("SELECT * FROM transactions WHERE user_id=:id")
+    List<Transaction> getAll(int id);
+
+    @Query("SELECT * FROM transactions WHERE :amount < ABS(amount) AND user_id=:id AND type=:type  ORDER BY date DESC")
+    List<Transaction> getTransaction(Double amount,int id,String type);
+
+
+    @Query("SELECT * FROM transactions WHERE user_id=:id AND :amount < ABS(amount) ")
+    List<Transaction> getAllWithLimit(int id,Double amount);
+
+
+    @Query("SELECT * FROM transactions")
+    List<Transaction> getEverything();
+
+
+
+
 
     @Insert(entity=Transaction.class,onConflict = OnConflictStrategy.ABORT)
     void insertTransaction(Transaction transaction);
