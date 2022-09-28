@@ -193,7 +193,7 @@ public class TransactionActivity extends AppCompatActivity {
 
                     case R.id.menu_item_transaction:
 
-                        //TODO: complete
+
                         break;
 
                     case R.id.menu_item_home:

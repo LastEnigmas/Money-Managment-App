@@ -98,7 +98,6 @@ public class LoanActivity extends AppCompatActivity {
 
                     case R.id.menu_item_loan:
 
-                        //TODO: complete
                         break;
 
                     case R.id.menu_item_transaction:

@@ -321,7 +321,6 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.menu_item_home:
 
-                        //TODO: complete
                         break;
 
 

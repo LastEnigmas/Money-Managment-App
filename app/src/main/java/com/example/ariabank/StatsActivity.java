@@ -58,7 +58,7 @@ public class StatsActivity extends AppCompatActivity {
             getTransactions.execute(user.getId());
 
             getLoans=new GetLoans();
-            getTransactions.execute(user.getId());
+            getLoans.execute(user.getId());
 
         }
 
@@ -103,6 +103,7 @@ public class StatsActivity extends AppCompatActivity {
                                 if (b.getX()==day){
                                     doesDayExist=true;
                                     break;
+
                                 }else {
                                     doesDayExist=false;
                                 }
@@ -111,11 +112,11 @@ public class StatsActivity extends AppCompatActivity {
                             if (doesDayExist){
                                 for (BarEntry e:entries){
                                     if (e.getX()==day){
-                                        e.setY(e.getY()+(float) t.getAmount());
+                                        e.setY(e.getY()+(float) Math.abs(t.getAmount()));
                                     }
                                 }
                             }else {
-                                entries.add(new BarEntry(day,(float) t.getAmount()));
+                                entries.add(new BarEntry(day,(float) Math.abs(t.getAmount())));
                             }
                         }
 
@@ -129,16 +130,21 @@ public class StatsActivity extends AppCompatActivity {
                 BarDataSet dataset = new BarDataSet(entries, "Account Activity");
                 dataset.setValueTextSize(10f);
 
+
                 dataset.setColor(Color.GREEN);
 
                 BarData data = new BarData(dataset);
-                data.setBarWidth(0.9f);
+                data.setBarWidth(0.8f);
+                data.setValueTextSize(8f);
+
 
                 barChart.getAxisRight().setEnabled(false);
                 XAxis xAxis = barChart.getXAxis();
 
                 xAxis.setAxisMaximum(30);
-                xAxis.setAxisMinimum(1);
+                xAxis.setAxisMinimum(2);
+                xAxis.setSpaceMax(40f);
+                xAxis.setSpaceMin(20f);
 
 
                 xAxis.setEnabled(false);
@@ -189,12 +195,18 @@ public class StatsActivity extends AppCompatActivity {
                     totalRemainedAmount+=l.getRemained_amount();
                 }
                 entries.add(new PieEntry((float) totalLoansAmount,"Total Loans"));
+
                 entries.add(new PieEntry((float) totalRemainedAmount,"Remained Loans"));
                 PieDataSet dataset=new PieDataSet(entries,"");
                 dataset.setColors(ColorTemplate.JOYFUL_COLORS);
                 dataset.setSliceSpace(5f);
+
                 PieData data=new PieData(dataset);
+                data.setValueTextSize(15f);
+
+
                 pieChart.setDrawHoleEnabled(false);
+                pieChart.setDescription(null);
                 pieChart.animateY(2000, Easing.EaseOutBack);
                 pieChart.setData(data);
                 pieChart.invalidate();
@@ -216,7 +228,7 @@ public class StatsActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.menu_item_stats:
-                        //TODO: complete
+
                         break;
 
                     case R.id.menu_item_investment:
