@@ -18,6 +18,9 @@ public interface loanDAO {
     @Query("SELECT * FROM loans_table WHERE user_id=:id")
     List<LoanTable> getLoans(int id);
 
+    @Query("SELECT * FROM loans_table")
+    List<LoanTable> getAll();
+
     @Query("SELECT remained_amount FROM loans_table WHERE  name=:name AND monthly_payment=:monthly AND user_id=:id")
     Double getLoanAmount(String name , Double monthly,int id);
 

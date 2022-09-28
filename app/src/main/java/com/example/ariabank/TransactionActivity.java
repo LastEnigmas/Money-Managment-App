@@ -169,7 +169,10 @@ public class TransactionActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.menu_item_stats:
-                        //TODO: complete
+                      Intent last=new Intent(TransactionActivity.this,StatsActivity.class);
+                        last.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(last);
+
                         break;
 
                     case R.id.menu_item_investment:
