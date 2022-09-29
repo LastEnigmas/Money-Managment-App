@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.ariabank.Adapters.InvestmentAdapter;
 import com.example.ariabank.dataBase.AppDataBase;
@@ -27,6 +29,7 @@ public class InvestmentActivity extends AppCompatActivity {
     private BottomNavigationView bottomnav;
     private InvestmentAdapter adapter;
     private GetInvestment getInvestment;
+    private TextView txt;
 
 
     @Override
@@ -91,7 +94,11 @@ public class InvestmentActivity extends AppCompatActivity {
 
             if(null!=investments){
                 adapter.setInvestments(investments);
+                if (investments.size()==0){
+                    txt.setVisibility(View.VISIBLE);
+                }
             }else{
+                txt.setVisibility(View.VISIBLE);
                 adapter.setInvestments(new ArrayList<InvestmentTable>());
             }
 
@@ -101,6 +108,7 @@ public class InvestmentActivity extends AppCompatActivity {
     private void initView() {
         InvestsRecView= (RecyclerView) findViewById(R.id.recviewinvestment);
         bottomnav= (BottomNavigationView) findViewById(R.id.bottomNavViewInvest);
+        txt= (TextView) findViewById(R.id.noInvestment);
     }
 
     private void initBottomNavView() {

@@ -164,9 +164,13 @@ public class TransferActivity extends AppCompatActivity {
             int id = db.transactiondao().getBackTransactionID(date, type, integers[0], description, amount);
             Users user= util.isUserLoggedIn();
             List<Users> lst=db.usersdao().getSpecificUser(user.getEmail());
-            Users myUser= lst.get(0);
-            Log.d(TAG, "doInBackground: AMount in new way: "+amount+myUser.getRemained_amount());
-            db.usersdao().UpdateWithEmail(myUser.getEmail(), amount+myUser.getRemained_amount());
+            if (lst.size()>0){
+                Users myUser= lst.get(0);
+                Log.d(TAG, "doInBackground: AMount in new way: "+amount+myUser.getRemained_amount());
+                db.usersdao().UpdateWithEmail(myUser.getEmail(), amount+myUser.getRemained_amount());
+
+            }
+
 
             return null;
 

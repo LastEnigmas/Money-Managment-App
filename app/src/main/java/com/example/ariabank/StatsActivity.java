@@ -206,6 +206,7 @@ public class StatsActivity extends AppCompatActivity {
 
 
                 pieChart.setDrawHoleEnabled(false);
+
                 pieChart.setDescription(null);
                 pieChart.animateY(2000, Easing.EaseOutBack);
                 pieChart.setData(data);

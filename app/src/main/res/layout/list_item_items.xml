@@ -12,12 +12,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
+            android:id="@+id/itemimg"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/itemimg"
-            android:src="@mipmap/ic_icon"
-            android:layout_margin="5dp"/>
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:src="@mipmap/ic_icon" />
 
         <TextView
             android:layout_width="wrap_content"

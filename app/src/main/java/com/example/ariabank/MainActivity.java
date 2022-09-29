@@ -500,8 +500,13 @@ public class MainActivity extends AppCompatActivity {
                AppDataBase db=AppDataBase.getInstance(MainActivity.this);
             Users user= util.isUserLoggedIn();
             List<Users> lst=db.usersdao().getSpecificUser(user.getEmail());
-            Users myUser= lst.get(0);
-            return myUser.getRemained_amount();
+            if (lst.size()>0){
+                Users myUser= lst.get(0);
+                return myUser.getRemained_amount();
+
+            }
+            return null;
+
 
 
 
@@ -515,9 +520,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Double aDouble) {
             super.onPostExecute(aDouble);
-
-
+            if (aDouble!=null){
                 txtAmount.setText(String.valueOf(aDouble)+"$");
+
+            }else {
+                txtAmount.setText("0.0$");
+
+            }
+
+
+
 
         }
     }

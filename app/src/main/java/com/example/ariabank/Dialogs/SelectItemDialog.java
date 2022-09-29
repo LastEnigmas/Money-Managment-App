@@ -1,11 +1,14 @@
 package com.example.ariabank.Dialogs;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.EditText;
@@ -114,8 +117,10 @@ public class SelectItemDialog extends DialogFragment implements ItemsAdapter.Get
             AppDataBase db=AppDataBase.getInstance(getActivity());
             List<item_table> lst=db.itemdao().getAllItems();
             if (lst.size()>0){
+                Log.d(TAG, "doInBackground: GetAll Item NOT Empty");
                 return new ArrayList<>(lst);
             }else {
+                Log.d(TAG, "doInBackground: Get All Item Empty");
                 return null;
             }
 

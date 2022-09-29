@@ -45,6 +45,7 @@ public class AddItemDialog extends DialogFragment {
         url= (EditText) view.findViewById(R.id.edttxtimgurl);
         description= (EditText) view.findViewById(R.id.edttxtItemDesc);
         warning= (TextView) view.findViewById(R.id.txtWarningItem);
+        warning.setVisibility(View.GONE);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +55,7 @@ public class AddItemDialog extends DialogFragment {
                    addItem.execute();
 
                }else {
+                   warning.setVisibility(View.VISIBLE);
                    warning.setText("Please fill all the blanks");
                }
 
@@ -91,6 +93,7 @@ public class AddItemDialog extends DialogFragment {
 
     private class AddItem extends AsyncTask<Void,Void,Void>{
         private String name,url,desc;
+        private AppDataBase db=AppDataBase.getInstance(getContext());
 
         @Override
         protected void onPreExecute() {
@@ -102,8 +105,9 @@ public class AddItemDialog extends DialogFragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
+
             item_table item= new item_table(name,url,desc);
-            AppDataBase db=AppDataBase.getInstance(getContext());
+
             db.itemdao().insertItem(item);
 
             return null;

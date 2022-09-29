@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.ariabank.Adapters.LoanAdapter;
 import com.example.ariabank.dataBase.AppDataBase;
@@ -16,6 +18,8 @@ import com.example.ariabank.dataBase.LoanTable;
 import com.example.ariabank.dataBase.Users;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +30,7 @@ public class LoanActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private LoanAdapter adapter;
     private GetLoans getLoans;
+    private TextView txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +67,17 @@ public class LoanActivity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<LoanTable> loanTables) {
             super.onPostExecute(loanTables);
             if (loanTables!=null){
+                if (loanTables.size()==0){
+                    txt.setVisibility(View.VISIBLE);
+
+                }
                 adapter.setLoans(loanTables);
+
 
 
             }else {
                 adapter.setLoans(new ArrayList<>());
+                txt.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -74,6 +85,7 @@ public class LoanActivity extends AppCompatActivity {
     private void initViews() {
         recyclerView= (RecyclerView) findViewById(R.id.loansrecview);
         bottomNavigationView= (BottomNavigationView) findViewById(R.id.bottomNavView);
+        txt= (TextView) findViewById(R.id.noLOan);
     }
 
     private void initBottomNavView() {
