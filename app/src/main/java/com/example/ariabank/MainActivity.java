@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.ariabank.Adapters.TransactionAdapter;
 import com.example.ariabank.Authentication.LoginActivity;
+import com.example.ariabank.Dialogs.AddItemDialog;
 import com.example.ariabank.Dialogs.AddTransactionDialog;
 import com.example.ariabank.dataBase.AppDataBase;
 import com.example.ariabank.dataBase.Shopping_table;
@@ -282,6 +283,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_exite:
                 utils.signOutUser();
                 recreate();
+
+            case R.id.AddItem:
+                AddItemDialog diag=new AddItemDialog();
+                diag.show(getSupportFragmentManager(),"Add Item Dialog");
 
 
 

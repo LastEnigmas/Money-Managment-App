@@ -1,7 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:padding="8dp"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item's name:"
+            android:layout_margin="15dp"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:id="@+id/txtitemsName"/>
+
+        <EditText
+            android:id="@+id/edttxtItemsName"
+            android:layout_width="200dp"
+
+
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/txtitemsName"
+            android:hint="Item's Name" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Image URL:"
+            android:layout_margin="15dp"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:id="@+id/imgUrl"
+            android:layout_below="@+id/txtitemsName"/>
+
+        <EditText
+            android:id="@+id/edttxtimgurl"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edttxtItemsName"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/txtitemsName"
+            android:hint="Image URL" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description:"
+            android:layout_margin="15dp"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:id="@+id/txtItemDescription"
+            android:layout_below="@+id/edttxtimgurl"/>
+
+        <EditText
+            android:id="@+id/edttxtItemDesc"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edttxtimgurl"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/txtitemsName"
+            android:hint="Description" />
+
+        <Button
+            android:id="@+id/btnAddItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edttxtItemDesc"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:text="Add"
+            android:background="@color/American_Green"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/txtWarningItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnAddItem"
+            android:text="@string/warning_something_is_wrong"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/warning"
+            android:visibility="gone"
+            android:layout_marginTop="15dp"/>
+
+    </RelativeLayout>
 
 
 
