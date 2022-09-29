@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.ColorSpace;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private TransactionAdapter adapter;
     private GetTransactionslst getTransactionslst;
     private GetProfit getProfit;
+    private TextView txtName;
 
 
     
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         initBottomNavView();
 
+
         setSupportActionBar(toolbar);
 
         utils=new Utils(this);
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         Users user=utils.isUserLoggedIn();
         if(null!= user){
             Toast.makeText(this, "User "+user.getEmail()+" logged in", Toast.LENGTH_SHORT).show();
+            txtName.setText(user.getFirst_name());
         }else {
             Intent intent=new Intent(this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -186,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpAmount() {
         Users user= utils.isUserLoggedIn();
-        Log.d(TAG, "setUpAmount: user_id: "+user.getId());
+
         if(user!=null){
             getAccountAmount=new getAccountAmount();
             getAccountAmount.execute(user);
@@ -265,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 String txt="Hi, How are you?\n Checkout this cool app. It was developed by Aria Taghizade.";
                                 Intent intent=new Intent(Intent.ACTION_SEND);
-                                intent.putExtra(Intent.EXTRA_TEXT,"");
+                                intent.putExtra(Intent.EXTRA_TEXT,txt);
                                 intent.setType("text/plain");
                                 Intent chooserIntent= Intent.createChooser(intent,"Send Message Via: ");
                                 startActivity(chooserIntent);
@@ -274,6 +278,10 @@ public class MainActivity extends AppCompatActivity {
 
                 builder.show();
                 break;
+
+            case R.id.menu_exite:
+                utils.signOutUser();
+                recreate();
 
 
 
@@ -432,6 +440,7 @@ public class MainActivity extends AppCompatActivity {
                 yAxis1.setAxisMaximum(200);
                 yAxis1.setAxisMinimum(10);
                 yAxis1.setDrawGridLines(false);
+                linecharts.setNoDataTextColor(Color.GREEN);
 
                 linecharts.setDescription(null);
                 linecharts.animateY(4000);
@@ -440,6 +449,7 @@ public class MainActivity extends AppCompatActivity {
 
             }else {
                 Log.d(TAG, "onPostExecute: transaction was null");
+
             }
         }
     }
@@ -638,8 +648,11 @@ public class MainActivity extends AppCompatActivity {
         txtWelcome= (TextView) findViewById(R.id.txtwelcome);
         transactions= (RecyclerView) findViewById(R.id.transactionRecView);
         barchar= (BarChart) findViewById(R.id.profitChart);
+        barchar.setNoDataTextColor(getResources().getColor(R.color.American_Green));
         linecharts= (LineChart) findViewById(R.id.dailySpentChart);
+        linecharts.setNoDataTextColor(getResources().getColor(R.color.American_Green));
         fbAddTransaction= (FloatingActionButton) findViewById(R.id.fbTransaction);
         toolbar= (Toolbar) findViewById(R.id.toolbar);
+        txtName= (TextView) findViewById(R.id.Name);
     }
 }

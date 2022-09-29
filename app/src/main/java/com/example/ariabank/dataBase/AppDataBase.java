@@ -63,6 +63,17 @@ public abstract class AppDataBase extends RoomDatabase {
 
             itemdao.insertItem(it1);
 
+            item_table it2=new item_table("Car","https://www.zastavki.com/pictures/originals/2020Auto___Lamborghini_Gray_SUV_2019_Lamborghini_Urus_on_a_white_background_139312_.jpg",
+                    "Purchased car");
+
+            itemdao.insertItem(it2);
+
+
+            item_table it3=new item_table("Groceries","https://thumbs.dreamstime.com/b/paper-bag-groceries-white-background-156847921.jpg",
+                    "Grocery shopping");
+
+            itemdao.insertItem(it3);
+
 
 
 

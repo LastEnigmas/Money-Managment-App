@@ -49,7 +49,7 @@ public class Utils {
         SharedPreferences sharedPreferences= context.getSharedPreferences("Logged_in_user",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor= sharedPreferences.edit();
         editor.remove("user");
-        editor.commit();
+        editor.apply();
         Intent intent=new Intent(context, RegisterActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);

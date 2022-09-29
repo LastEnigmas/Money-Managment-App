@@ -51,6 +51,7 @@ public class StatsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stats);
         initViews();
         initBottomNavView();
+
         utils=new Utils(this);
         Users user= utils.isUserLoggedIn();
         if (null!=user){
@@ -142,9 +143,8 @@ public class StatsActivity extends AppCompatActivity {
                 XAxis xAxis = barChart.getXAxis();
 
                 xAxis.setAxisMaximum(30);
-                xAxis.setAxisMinimum(2);
-                xAxis.setSpaceMax(40f);
-                xAxis.setSpaceMin(20f);
+                xAxis.setAxisMinimum(1);
+
 
 
                 xAxis.setEnabled(false);
@@ -194,9 +194,9 @@ public class StatsActivity extends AppCompatActivity {
                     totalLoansAmount+= l.getInit_amount();
                     totalRemainedAmount+=l.getRemained_amount();
                 }
-                entries.add(new PieEntry((float) totalLoansAmount,"Total Loans"));
+                entries.add(new PieEntry((float) totalLoansAmount,"Total"));
 
-                entries.add(new PieEntry((float) totalRemainedAmount,"Remained Loans"));
+                entries.add(new PieEntry((float) totalRemainedAmount,"Remained"));
                 PieDataSet dataset=new PieDataSet(entries,"");
                 dataset.setColors(ColorTemplate.JOYFUL_COLORS);
                 dataset.setSliceSpace(5f);
@@ -216,7 +216,9 @@ public class StatsActivity extends AppCompatActivity {
 
     private void initViews() {
         barChart= (BarChart) findViewById(R.id.barChartActivities);
+        barChart.setNoDataTextColor(getResources().getColor(R.color.American_Green));
         pieChart= (PieChart) findViewById(R.id.pieChartLoans);
+        pieChart.setNoDataTextColor(getResources().getColor(R.color.American_Green));
         bottomNavigationView= (BottomNavigationView) findViewById(R.id.bottomNavViewStats);
     }
 

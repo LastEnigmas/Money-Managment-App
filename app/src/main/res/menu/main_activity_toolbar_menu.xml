@@ -2,9 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:title="Add Item"
+        android:id="@+id/AddItem"
+        android:icon="@drawable/ic_add"
+        app:showAsAction="always"/>
+    <item
         android:title="Aria Bank"
         android:id="@+id/menu_aria_bank"
-        android:icon="@mipmap/logo"
+        android:icon="@drawable/ic_info"
         app:showAsAction="always"/>
+    <item
+        android:title="Exite"
+        android:id="@+id/menu_exite"
+        android:icon="@drawable/ic_signout"
+        app:showAsAction="always"/>
+
 
 </menu>

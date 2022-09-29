@@ -20,11 +20,11 @@ public interface TransactionDAO {
     @Query("SELECT * FROM transactions WHERE user_id=:id")
     List<Transaction> getAll(int id);
 
-    @Query("SELECT * FROM transactions WHERE :amount < ABS(amount) AND user_id=:id AND type=:type  ORDER BY date DESC")
+    @Query("SELECT * FROM transactions WHERE :amount < ABS(amount) AND user_id=:id AND type=:type  ORDER BY date ASC")
     List<Transaction> getTransaction(Double amount,int id,String type);
 
 
-    @Query("SELECT * FROM transactions WHERE user_id=:id AND :amount < ABS(amount) ")
+    @Query("SELECT * FROM transactions WHERE user_id=:id AND :amount < ABS(amount) ORDER BY date DESC ")
     List<Transaction> getAllWithLimit(int id,Double amount);
 
 
