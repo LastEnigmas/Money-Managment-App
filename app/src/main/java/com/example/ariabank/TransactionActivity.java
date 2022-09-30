@@ -150,8 +150,14 @@ public class TransactionActivity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<Transaction> transactions) {
             super.onPostExecute(transactions);
             if(null!= transactions){
-                txtNoTransaction.setVisibility(View.GONE);
-                adapter.setTransactions(transactions);
+                if (transactions.size()>0){
+                    txtNoTransaction.setVisibility(View.GONE);
+                    adapter.setTransactions(transactions);
+
+                }else {
+                    txtNoTransaction.setVisibility(View.VISIBLE);
+                }
+
 
 
             }else {

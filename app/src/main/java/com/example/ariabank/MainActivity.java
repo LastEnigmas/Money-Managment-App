@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private TransactionAdapter adapter;
     private GetTransactionslst getTransactionslst;
     private GetProfit getProfit;
-    private TextView txtName;
+    private TextView txtName,NoTransaction;
 
 
     
@@ -483,7 +483,14 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<Transaction> transactions) {
             super.onPostExecute(transactions);
             if(transactions!=null){
-                adapter.setTransactions(transactions);
+                if (transactions.size()>0){
+                    NoTransaction.setVisibility(View.GONE);
+                    adapter.setTransactions(transactions);
+
+                }else {
+                    NoTransaction.setVisibility(View.VISIBLE);
+                }
+
             }else {
                 adapter.setTransactions(new ArrayList<Transaction>());
             }
@@ -638,7 +645,7 @@ public class MainActivity extends AppCompatActivity {
 
                     xAxis.setEnabled(false);
                     YAxis yAxis = barchar.getAxisLeft();
-                    yAxis.setAxisMaximum(150);
+
                     yAxis.setAxisMinimum(10);
                     yAxis.setDrawGridLines(false);
 
@@ -671,5 +678,6 @@ public class MainActivity extends AppCompatActivity {
         fbAddTransaction= (FloatingActionButton) findViewById(R.id.fbTransaction);
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         txtName= (TextView) findViewById(R.id.Name);
+        NoTransaction= (TextView) findViewById(R.id.mainNoTransaction);
     }
 }

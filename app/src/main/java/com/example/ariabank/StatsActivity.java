@@ -82,88 +82,94 @@ public class StatsActivity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<Transaction> transactions) {
             super.onPostExecute(transactions);
             if (null!=transactions){
+                if (transactions.size()>0){
 
-                Calendar calendar=Calendar.getInstance();
-                int currentmonth=calendar.get(Calendar.MONTH);
-                int currentyear=calendar.get(Calendar.YEAR);
-                SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+                    Calendar calendar=Calendar.getInstance();
+                    int currentmonth=calendar.get(Calendar.MONTH);
+                    int currentyear=calendar.get(Calendar.YEAR);
+                    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 
-                ArrayList<BarEntry> entries=new ArrayList<>();
-                for (Transaction t:transactions){
-                    try {
-                        Date date=sdf.parse(t.getDate());
+                    ArrayList<BarEntry> entries=new ArrayList<>();
+                    for (Transaction t:transactions){
+                        try {
+                            Date date=sdf.parse(t.getDate());
 
-                        calendar.setTime(date);
-                        int month= calendar.get(Calendar.MONTH);
-                        int year= calendar.get(Calendar.YEAR);
-                        int day= calendar.get(Calendar.DAY_OF_MONTH)+1;
-                        if(month==currentmonth && year==currentyear){
-                            boolean doesDayExist=false;
+                            calendar.setTime(date);
+                            int month= calendar.get(Calendar.MONTH);
+                            int year= calendar.get(Calendar.YEAR);
+                            int day= calendar.get(Calendar.DAY_OF_MONTH)+1;
+                            if(month==currentmonth && year==currentyear){
+                                boolean doesDayExist=false;
 
-                            for (BarEntry b:entries){
-                                if (b.getX()==day){
-                                    doesDayExist=true;
-                                    break;
+                                for (BarEntry b:entries){
+                                    if (b.getX()==day){
+                                        doesDayExist=true;
+                                        break;
 
-                                }else {
-                                    doesDayExist=false;
-                                }
-                            }
-
-                            if (doesDayExist){
-                                for (BarEntry e:entries){
-                                    if (e.getX()==day){
-                                        e.setY(e.getY()+(float) Math.abs(t.getAmount()));
+                                    }else {
+                                        doesDayExist=false;
                                     }
                                 }
-                            }else {
-                                entries.add(new BarEntry(day,(float) Math.abs(t.getAmount())));
+
+                                if (doesDayExist){
+                                    for (BarEntry e:entries){
+                                        if (e.getX()==day){
+                                            e.setY(e.getY()+(float) Math.abs(t.getAmount()));
+                                        }
+                                    }
+                                }else {
+                                    entries.add(new BarEntry(day,(float) Math.abs(t.getAmount())));
+                                }
                             }
+
+
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                         }
-
-
-
-                    } catch (ParseException e) {
-                        e.printStackTrace();
                     }
+
+                    BarDataSet dataset = new BarDataSet(entries, "Account Activity");
+                    dataset.setValueTextSize(10f);
+
+
+                    dataset.setColor(Color.GREEN);
+
+                    BarData data = new BarData(dataset);
+                    data.setBarWidth(0.8f);
+                    data.setValueTextSize(8f);
+
+
+                    barChart.getAxisRight().setEnabled(false);
+                    XAxis xAxis = barChart.getXAxis();
+
+                    xAxis.setAxisMaximum(30);
+                    xAxis.setAxisMinimum(1);
+
+
+
+                    xAxis.setEnabled(false);
+                    YAxis yAxis = barChart.getAxisLeft();
+
+                    yAxis.setAxisMinimum(10);
+                    yAxis.setDrawGridLines(false);
+
+                    barChart.setData(data);
+
+                    Description description=new Description();
+                    description.setText("All of the accounts transaction.");
+                    description.setTextSize(12f);
+                    barChart.setDescription(description);
+
+                    barChart.setDescription(null);
+
+
+                    barChart.invalidate();
+
+                }else {
+                    barChart.setNoDataTextColor(getResources().getColor(R.color.American_Green));
                 }
 
-                BarDataSet dataset = new BarDataSet(entries, "Account Activity");
-                dataset.setValueTextSize(10f);
-
-
-                dataset.setColor(Color.GREEN);
-
-                BarData data = new BarData(dataset);
-                data.setBarWidth(0.8f);
-                data.setValueTextSize(8f);
-
-
-                barChart.getAxisRight().setEnabled(false);
-                XAxis xAxis = barChart.getXAxis();
-
-                xAxis.setAxisMaximum(30);
-                xAxis.setAxisMinimum(1);
-
-
-
-                xAxis.setEnabled(false);
-                YAxis yAxis = barChart.getAxisLeft();
-
-                yAxis.setAxisMinimum(10);
-                yAxis.setDrawGridLines(false);
-
-                barChart.setData(data);
-
-                Description description=new Description();
-                description.setText("All of the accounts transaction.");
-                description.setTextSize(12f);
-                barChart.setDescription(description);
-
-                barChart.setDescription(null);
-
-
-                barChart.invalidate();
 
 
             }
@@ -187,30 +193,37 @@ public class StatsActivity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<LoanTable> loanTables) {
             super.onPostExecute(loanTables);
             if (loanTables!=null){
-                ArrayList<PieEntry> entries=new ArrayList<>();
-                double totalLoansAmount=0.0;
-                double totalRemainedAmount=0.0;
-                for (LoanTable l:loanTables){
-                    totalLoansAmount+= l.getInit_amount();
-                    totalRemainedAmount+=l.getRemained_amount();
+                if(loanTables.size()>0){
+
+                    ArrayList<PieEntry> entries=new ArrayList<>();
+                    double totalLoansAmount=0.0;
+                    double totalRemainedAmount=0.0;
+                    for (LoanTable l:loanTables){
+                        totalLoansAmount+= l.getInit_amount();
+                        totalRemainedAmount+=l.getRemained_amount();
+                    }
+                    entries.add(new PieEntry((float) totalLoansAmount,"Total"));
+
+                    entries.add(new PieEntry((float) totalRemainedAmount,"Remained"));
+                    PieDataSet dataset=new PieDataSet(entries,"");
+                    dataset.setColors(ColorTemplate.JOYFUL_COLORS);
+                    dataset.setSliceSpace(5f);
+
+                    PieData data=new PieData(dataset);
+                    data.setValueTextSize(15f);
+
+
+                    pieChart.setDrawHoleEnabled(false);
+
+                    pieChart.setDescription(null);
+                    pieChart.animateY(2000, Easing.EaseOutBack);
+                    pieChart.setData(data);
+                    pieChart.invalidate();
+
+                }else {
+                    pieChart.setNoDataTextColor(getResources().getColor(R.color.American_Green));
                 }
-                entries.add(new PieEntry((float) totalLoansAmount,"Total"));
 
-                entries.add(new PieEntry((float) totalRemainedAmount,"Remained"));
-                PieDataSet dataset=new PieDataSet(entries,"");
-                dataset.setColors(ColorTemplate.JOYFUL_COLORS);
-                dataset.setSliceSpace(5f);
-
-                PieData data=new PieData(dataset);
-                data.setValueTextSize(15f);
-
-
-                pieChart.setDrawHoleEnabled(false);
-
-                pieChart.setDescription(null);
-                pieChart.animateY(2000, Easing.EaseOutBack);
-                pieChart.setData(data);
-                pieChart.invalidate();
             }
         }
     }
